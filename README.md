@@ -7,8 +7,7 @@ hotel
 [Vue](https://cn.vuejs.org/) + [Axios](http://www.axios-js.com/) + [Element](https://element.eleme.cn/#/)
 
 ## 项目结构划分
-页面源码在*src*文件夹下  
-<code><pre>components文件夹内为组件 - 
+页面源码在**src**文件夹下  <code><pre>components文件夹内为组件 - 
                    - HeaderBar.vue是页头状态栏,负责显示登录信息等
                    - LeftBar.vue是左侧导航栏  
 views文件夹:主要页面  
