@@ -16,7 +16,7 @@ router.js记录项目路由和前端的权限控制
 store.js同为权限控制  
 </pre></code>
 ## 如何运行
-1.安装必要环境,Node.js、npm(node自带)  
+1.安装必要环境,[Node.js](https://nodejs.org/en/)、npm(node自带)  
 2.`cd hotel && npm run serve`
 
 ## 如何打包为HTML文件
