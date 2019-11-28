@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card" shadow="hover">
     <center>
-      <h1>华通宾馆</h1>
+      <h1>酒店管理系统</h1>
     </center>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" hide-required-asterisk>
       <el-form-item label="用户名" prop="name">
@@ -58,6 +58,10 @@ export default {
       // 登录加载动画
       this.subLoading = true
       let self = this
+      sessionStorage.setItem('hotel_roles', '1')
+      sessionStorage.setItem('hotel_names', 's')
+      self.$store.state.names = 's'
+      self.$router.push({ path: '/guest', query: {} })
       this.$axios.post(self.loginAPI, {
         mid: self.ruleForm.name,
         password: self.ruleForm.pass

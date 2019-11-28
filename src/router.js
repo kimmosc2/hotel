@@ -66,16 +66,6 @@ route.beforeEach((to, from, next) => {
       console.log('role或name为空')
       next('/login')
     } else {
-      // 通过indexOf判断 role中是否包含meta 从而确定是否跳转
-      // if (role.indexOf(to.matched[0].meta) > -1) {
-      // console.log(to.matched[0])
-      // if (role > to.matched[0].meta) {
-      //   console.log('执行了next')
-      //   next()
-      // } else {
-      //   console.log('权限不足')
-      //   next('403')
-      // }
       console.log('继续')
       next()
     }

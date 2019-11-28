@@ -16,7 +16,7 @@
       </template>
       <el-menu-item-group>
         <el-menu-item index="/guest">开退房管理</el-menu-item>
-<!--        <el-menu-item index="/history" disabled>历史记录查询</el-menu-item>-->
+        <el-menu-item index="/history">历史记录查询</el-menu-item>
 <!--        <el-menu-item index="/history" disabled>收入统计汇总</el-menu-item>-->
 <!--        <el-menu-item index="/guestroom">房间信息管理</el-menu-item>-->
       </el-menu-item-group>
