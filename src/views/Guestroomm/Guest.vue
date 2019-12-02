@@ -48,11 +48,15 @@
         <el-table-column
           label="开出时间"
           prop="chenkin"
+          width="170px"
+          :formatter="dateFormatter"
           align="center">
         </el-table-column>
         <el-table-column
           label="到期时间"
           prop="departure"
+          width="170px"
+          :formatter="dateFormatter"
           align="center">
         </el-table-column>
 <!--        <el-table-column-->
@@ -165,6 +169,16 @@ export default {
     }
   },
   methods: {
+    dateFormatter (row, column) {
+      // console.log(row)
+      let Year = (new Date(row.chenkin)).getFullYear()
+      let month = (new Date(row.chenkin)).getMonth() + 1
+      let day = (new Date(row.chenkin)).getDate()
+      let hours = (new Date(row.chenkin)).getHours()
+      let minutes = (new Date(row.chenkin)).getMinutes()
+      // console.log(Year + '-' + month + '-' + day + ' ' + hours + ':' + minutes)
+      return Year + '-' + month + '-' + day + '  ' + hours + ':' + minutes
+    },
     change () {
       let self = this
       self.dialogFormVisible = false

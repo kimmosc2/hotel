@@ -4,6 +4,9 @@ import Home from './views/Home.vue'
 import Login from './views/Login'
 import Guest from './views/Guestroomm/Guest'
 import OpenGuestroom from './views/Guestroomm/OpenGuestroom'
+import Historires from './views/history/Historires'
+import HistoryInfo from './views/history/HistoryInfo'
+import Sysinfo from './views/Sysinfo'
 
 Vue.use(Router)
 
@@ -12,7 +15,7 @@ let route = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -30,6 +33,21 @@ let route = new Router({
       path: '/openGuestroom/:gid', // 开房详情
       name: 'openGuestroom',
       component: OpenGuestroom
+    },
+    {
+      path: '/history/:hid', // 开房详情
+      name: 'history',
+      component: HistoryInfo
+    },
+    {
+      path: '/histories', // 历史记录
+      name: 'histories',
+      component: Historires
+    },
+    {
+      path: '/sysinfo', // 历史记录
+      name: 'sysinfo',
+      component: Sysinfo
     },
     {
       path: '/about',

@@ -3,6 +3,9 @@
     <h2>录入房间信息</h2>
     <div class="factory-info">
       <el-form :inline="true" ref="form" :model="form" label-width="150px">
+        <el-form-item label="流水号">
+          <el-input v-model="form.gid" disabled></el-input>
+        </el-form-item>
         <el-form-item label="房间号">
           <el-input v-model="form.gid" disabled></el-input>
         </el-form-item>
@@ -10,31 +13,27 @@
           <el-input v-model="form.type" disabled></el-input>
         </el-form-item>
         <el-form-item label="姓名">
-          <el-input v-model="form.tname"></el-input>
+          <el-input v-model="form.tname" disabled></el-input>
         </el-form-item>
         <el-form-item label="手机号">
-          <el-input v-model="form.phone" type="phone"></el-input>
+          <el-input v-model="form.phone" disabled type="phone"></el-input>
         </el-form-item>
-        <el-form-item label="身份证号" >
-          <el-input v-model="form.identity"  type="phone" style="width:570px"></el-input>
+        <el-form-item label="身份证号">
+          <el-input v-model="form.identity" disabled type="phone" ></el-input>
         </el-form-item>
         <el-form-item label="开出时间">
-          <el-date-picker type="datetime" placeholder="选择日期" v-model="form.chenkin" style="width: 210px;"></el-date-picker>
+          <el-input v-model="form.chenkin" disabled type="text"></el-input>
         </el-form-item>
         <el-form-item label="到期时间">
-          <el-date-picker type="datetime" placeholder="选择日期" v-model="form.departure" style="width: 210px;"></el-date-picker>
+          <el-input v-model="form.departure" disabled type="text" ></el-input>
         </el-form-item>
         <el-form-item label="房费">
           <el-input v-model="form.price" disabled></el-input>
         </el-form-item>
-        <el-form-item label="备注">
-          <el-input type="textarea" v-model="form.remark" :rows="3" style="width: 570px"></el-input>
-        </el-form-item>
         <br>
         <center>
         <el-form-item >
-          <el-button type="primary" @click="onSubmit123">保存</el-button>
-          <el-button @click="exit">取消</el-button>
+          <el-button @click="exit">返回</el-button>
         </el-form-item>
         </center>
       </el-form>

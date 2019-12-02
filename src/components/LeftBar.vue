@@ -5,18 +5,19 @@
     class="el-menu-vertical-demo left-body"
     @open="handleOpen"
     @close="handleClose">
-    <el-menu-item index="1">
-      <i class="el-icon-menu"></i>
-      <span slot="title" index="/">首页</span>
+    <el-menu-item index="/home">
+      <i class="el-icon-discover"></i>
+      <span slot="title" index="/">概览</span>
     </el-menu-item>
     <el-submenu index="2">
       <template slot="title">
-        <i class="el-icon-location"></i>
+        <i class="el-icon-office-building"></i>
         <span>订单管理</span>
       </template>
       <el-menu-item-group>
-        <el-menu-item index="/guest">开退房管理</el-menu-item>
-        <el-menu-item index="/history">历史记录查询</el-menu-item>
+        <el-menu-item index="/guest"><i class="el-icon-table-lamp"></i>开退房管理</el-menu-item>
+        <el-menu-item index="/histories"><i class="el-icon-time"></i>历史记录查询</el-menu-item>
+<!--        <el-menu-item index="/sysinfo">系统状态</el-menu-item>-->
 <!--        <el-menu-item index="/history" disabled>收入统计汇总</el-menu-item>-->
 <!--        <el-menu-item index="/guestroom">房间信息管理</el-menu-item>-->
       </el-menu-item-group>
@@ -41,7 +42,7 @@ export default {
 
 <style scoped>
   .left-body{
-    width: 20%;
+    width: 17%;
     height: 800px;
     float: left;
   }

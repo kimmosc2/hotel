@@ -2,21 +2,22 @@
   <el-col :span="19">
     <h2>录入房间信息</h2>
     <div class="factory-info">
-      <el-form :inline="true" ref="form" :model="form" label-width="150px">
+      <el-form :rules="rules" :inline="true" ref="form" :model="form" label-width="150px">
         <el-form-item label="房间号">
           <el-input v-model="form.gid" disabled></el-input>
         </el-form-item>
-        <el-form-item label="房间类型">
-          <el-input v-model="form.type" disabled></el-input>
+        <el-form-item label="房间类型" >
+          <el-input v-model="displayType" disabled></el-input>
+<!--          <el-input v-model="form.type" hidden></el-input>-->
         </el-form-item>
-        <el-form-item label="姓名">
-          <el-input v-model="form.tname"></el-input>
+        <el-form-item label="姓名" prop="tname">
+          <el-input v-model="form.tname" maxlength="10"></el-input>
         </el-form-item>
-        <el-form-item label="手机号">
-          <el-input v-model="form.phone" type="phone"></el-input>
+        <el-form-item label="手机号" prop="phone">
+          <el-input v-model="form.phone" type="form.phone" maxlength="11"></el-input>
         </el-form-item>
-        <el-form-item label="身份证号" >
-          <el-input v-model="form.identity"  type="phone" style="width:570px"></el-input>
+        <el-form-item label="身份证号" prop="identity">
+          <el-input v-model="form.identity"  type="form.identity" style="width:570px" maxlength="18"></el-input>
         </el-form-item>
         <el-form-item label="开出时间">
           <el-date-picker type="datetime" placeholder="选择日期" v-model="form.chenkin" style="width: 210px;"></el-date-picker>
@@ -33,7 +34,7 @@
         <br>
         <center>
         <el-form-item >
-          <el-button type="primary" @click="onSubmit123">保存</el-button>
+          <el-button :v-show="saveFlag" type="primary" @click="onSubmit123">保存</el-button>
           <el-button @click="exit">取消</el-button>
         </el-form-item>
         </center>
@@ -49,6 +50,9 @@ export default {
     return {
       openGuestURL: '/api/v1/manager-selectByIdGuestroom',
       updateGuestURL: '/api/v1/manager-updateGuestroom',
+      addHistory: '/api/v1/manager-addHistory',
+      displayType: '',
+      saveFlag:false,
       form: {
         gid: 0, // 房间号
         type: 0, // 房间类型
@@ -61,10 +65,49 @@ export default {
         tname: '', // 租客姓名
         identity: '', // 身份证号
         phone: '' //  手机号
+      },
+      rules: {
+          tname: [
+            { required: true, message: '请输入姓名', trigger: 'blur' },
+            { min: 2, message: '至少输入2个字符', trigger: 'blur' }
+          ],
+          phone: [
+            { required: true, message: '请输入手机号', trigger: 'blur' },
+            { min: 11, max: 11, message: '长度在11位', trigger: 'blur' }
+          ],
+          identity: [
+            { required: true, message: '请输入身份证号', trigger: 'blur' },
+            { min: 18, max: 18, message: '长度为18位', trigger: 'blur' }
+          ],
       }
     }
   },
   methods: {
+    submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.onSubmit123()
+            alert('submit!')
+          } else {
+            console.log('error submit!!')
+            return false;
+          }
+        });
+    },
+    addHistoryFunc () {
+      let self = this
+      self.$axios.post(self.addHistory, {
+        'gid': self.form.gid,
+        'type': self.form.type,
+        'state': 1,
+        'chenkin': self.form.chenkin,
+        'departure': self.form.departure,
+        'remark': self.form.remark,
+        'tname': self.form.tname,
+        'identity': self.form.identity,
+        'phone': self.form.phone
+      })
+    },
     onSubmit123 () {
       let self = this
       self.$axios.post(self.updateGuestURL, {
@@ -80,6 +123,7 @@ export default {
       })
         .then(function (response) {
           if (response.data.status === 0) {
+            self.addHistoryFunc()
             self.$message.success('成功')
             self.$router.push({ path: '/guest', query: {} })
           } else {
@@ -91,6 +135,19 @@ export default {
           console.log(err)
           self.$message.warning('修改失败,请检查您的网络连接')
         })
+    },
+    formatType (cellValue) {
+      if (cellValue === 1) {
+        return '总统套房'
+      } else if (cellValue === 2) {
+        return '豪华套房'
+      } else if (cellValue === 3) {
+        return '标准房'
+      } else if (cellValue === 4) {
+        return '经济房'
+      } else if (cellValue === 5) {
+        return '小时房'
+      }
     },
     exit () {
       this.$router.push({ path: '/guest', query: {} })
@@ -121,6 +178,7 @@ export default {
       self.form.tname = guest.tname
       self.form.identity = guest.identity
       self.form.phone = guest.phone
+      self.displayType = self.formatType(guest.type)
     }
   },
   created () {
